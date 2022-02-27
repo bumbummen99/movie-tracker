@@ -10,7 +10,7 @@ use App\Models\Collectible;
 use Carbon\Carbon;
 use Illuminate\Support\Arr;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-
+use Illuminate\Support\Facades\Cache;
 
 class CreateCollectible extends Modal
 {
@@ -32,8 +32,10 @@ class CreateCollectible extends Modal
 
     public function searchTerm(OMDbAPI $omdbApi)
     {
-        /* Try to find the media */
-        $result = $omdbApi->search($this->name, 'movie', $this->releaseDate);
+        /* Try to find the movie and cache results */
+        $result = Cache::remember($this->name . $this->releaseDate, 60 * 5, function() use ($omdbApi) {
+            return $omdbApi->search($this->name, 'movie', $this->releaseDate);
+        });
 
         /* Make sure the request is OK and we found something */
         if (Arr::get($result, 'code') === 200 && ! Arr::has($result, 'data.Error')) {
