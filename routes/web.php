@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [StaticPagesController::class, 'welcome'])->name('welcome');
 
 /* Protected area */
-Route::middleware(['auth'])->group(function() {
+Route::middleware(['auth'])->group(function () {
     Route::get('collection', [StaticPagesController::class, 'collection'])->name('collection');
 });
 
