@@ -42,7 +42,7 @@ jobs:
           php artisan key:generate
 
       - name: Tests Coverage
-        run: vendor/bin/phpunit --coverage-clover=coverage.xml
+        run: php artisan test --coverage-clover=coverage.xml
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v1
