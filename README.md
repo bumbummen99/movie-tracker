@@ -25,7 +25,7 @@ docker run --rm \
     composer install --ignore-platform-reqs
 ```
 
-If this is your first time using this installtion you will have to create an .env file, simply copy the example:
+If this is your first time using this installation you will have to create an .env file, simply copy the example:
 ```
 cp .env.example .env
 ```
@@ -43,6 +43,12 @@ sail artisan key:generate
 Once you have generated the key you can proceed to run the migrations in order to initialize the dabase:
 ```
 sail artisan migrate
+```
+
+Before you can access the frontend you will first have to install dependencies using NPM and build the CSS/JS using the follwing command
+```
+sail npm i && \
+sail npm run dev
 ```
 
 That's it! Now you can navigate to http://localhost and use the application.
