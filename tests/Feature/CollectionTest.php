@@ -8,9 +8,9 @@ use App\Models\Collectible;
 use App\Models\Movie;
 use App\Models\User;
 use Carbon\Carbon;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Livewire\Livewire;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class CollectionTest extends TestCase
 {
@@ -46,7 +46,7 @@ class CollectionTest extends TestCase
             ->set('name', 'Star Wars')
             ->set('releaseDate', Carbon::now()->format('Y-m-d'))
             ->call('addMovie');
- 
+
         $this->assertTrue(Movie::whereName('Star Wars')->exists());
         $this->assertTrue(Collectible::query()->whereRelation('movie', 'name', 'Star Wars')->exists());
     }
@@ -65,7 +65,7 @@ class CollectionTest extends TestCase
             ->call('searchTerm')
             ->assertNotSet('results', [])
             ->call('importMovie', 'tt2488496');
- 
+
         $this->assertTrue(Movie::whereName('Star Wars: Episode VII - The Force Awakens')->exists());
         $this->assertTrue(Collectible::query()->whereRelation('movie', 'name', 'Star Wars: Episode VII - The Force Awakens')->exists());
     }

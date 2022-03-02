@@ -2,14 +2,14 @@
 
 namespace App\Http\Livewire;
 
+use aharen\OMDbAPI;
 use App\Http\Livewire\Abstracts\Modal;
+use App\Models\Collectible;
 use App\Models\Movie;
 use App\Models\User;
-use aharen\OMDbAPI;
-use App\Models\Collectible;
 use Carbon\Carbon;
-use Illuminate\Support\Arr;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Cache;
 
 class CreateCollectible extends Modal
@@ -19,7 +19,7 @@ class CreateCollectible extends Modal
     public string $name = '';
     public string $releaseDate = '';
     public array $results = [];
- 
+
     protected $rules = [
         'name'        => 'required|string',
         'releaseDate' => 'required|date',
@@ -33,7 +33,7 @@ class CreateCollectible extends Modal
     public function searchTerm(OMDbAPI $omdbApi)
     {
         /* Try to find the movie and cache results */
-        $result = Cache::remember($this->name . $this->releaseDate, 60 * 5, function() use ($omdbApi) {
+        $result = Cache::remember($this->name.$this->releaseDate, 60 * 5, function () use ($omdbApi) {
             return $omdbApi->search($this->name, 'movie', $this->releaseDate);
         });
 
@@ -48,10 +48,10 @@ class CreateCollectible extends Modal
     }
 
     /**
-     * Add a movie by importing data
+     * Add a movie by importing data.
      */
     public function importMovie(OMDbAPI $omdbApi, string $imdbID)
-    { 
+    {
         /* Try to fetch the movie details */
         $result = $omdbApi->fetch('i', $imdbID);
 
@@ -61,11 +61,11 @@ class CreateCollectible extends Modal
             $movie = $this->getOrCreateMovie(Arr::get($result, 'data.Title'), $releaseDate, Arr::get($result, 'data.Poster', null));
 
             $this->attachMovie($movie);
-        }        
+        }
     }
 
     /**
-     * Add a movie by manual data
+     * Add a movie by manual data.
      */
     public function addMovie()
     {
