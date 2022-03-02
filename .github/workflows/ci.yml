@@ -36,6 +36,11 @@ jobs:
       - name: Install composer packages
         run: composer install --prefer-dist --no-interaction
 
+      - name: Configure Laravel
+        run: |
+          php -r "file_exists('.env') || copy('.env.example', '.env');"
+          php artisan key:generate
+
       - name: Tests Coverage
         run: vendor/bin/phpunit --coverage-clover=coverage.xml
 
