@@ -18,7 +18,7 @@ class Movie extends Model
     protected $fillable = [
         'name',
         'release_date',
-        'poster'
+        'poster',
     ];
 
     /**

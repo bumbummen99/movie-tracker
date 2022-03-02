@@ -4,9 +4,9 @@ namespace App\Http\Livewire;
 
 use App\Models\Movie;
 use App\Models\User;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Livewire\Component;
 use Livewire\WithPagination;
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class Collectibles extends Component
 {
