@@ -1,2 +1,7 @@
-php:
-  preset: laravel
+preset: laravel
+version: 8
+disabled:
+  - no_unused_imports
+finder:
+  not-name:
+    - index.php
