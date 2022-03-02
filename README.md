@@ -1,5 +1,5 @@
 # Movie Tracker
-![CI Code Checks](https://github.com/bumbummen99/movie-tracker/workflows/CI%20Code%20Checks/badge.svg?branch=master)
+![CI Code Checks](https://github.com/bumbummen99/movie-tracker/workflows/CI/badge.svg?branch=master)
 [![codecov](https://codecov.io/gh/bumbummen99/movie-tracker/branch/master/graph/badge.svg)](https://codecov.io/gh/bumbummen99/movie-tracker)
 [![StyleCI](https://styleci.io/repos/464262987/shield?branch=master)](https://styleci.io/repos/464262987)
 
