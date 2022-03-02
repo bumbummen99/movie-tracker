@@ -9,6 +9,7 @@
 
 **For advanced users:**
 - Any HTTP-Server
+- PHP >=8.0
 - MariaDB / MySQL server
 - Redis server
 
