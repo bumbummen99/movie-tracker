@@ -30,6 +30,11 @@ If this is your first time using this installation you will have to create an .e
 cp .env.example .env
 ```
 
+Since we are using Sail for our local environment, define the bash alias if it is not already defined on your machine or substitute `sail` with `vendor/bin/sail` in the following commands:
+```
+alias sail='[ -f sail ] && bash sail || bash vendor/bin/sail'
+```
+
 Once the dependencies are installed you can run the application using Laravel Sail:
 ```
 sail up -d
