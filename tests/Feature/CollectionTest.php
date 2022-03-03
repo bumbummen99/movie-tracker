@@ -114,7 +114,7 @@ class CollectionTest extends TestCase
         $response->assertSeeText('Star Wars: Episode VII - The Force Awakens');
 
         Livewire::test(Collectibles::class, [
-            'user' => $user
+            'user' => $user,
         ])
             ->call('removeCollectible', $movie->id);
 
