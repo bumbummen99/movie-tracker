@@ -92,6 +92,38 @@ class CollectionTest extends TestCase
         $response->assertSeeText('Star Wars: Episode VII - The Force Awakens');
     }
 
+    /**
+     * A basic test example.
+     *
+     * @return void
+     */
+    public function test_user_can_remove_movies_from_his_collection()
+    {
+        $user = self::createUser();
+
+        $this->actingAs($user);
+
+        Livewire::test(CreateCollectible::class)
+            ->call('importMovie', 'tt2488496');
+
+        $movie = Movie::query()->where('name', 'Star Wars: Episode VII - The Force Awakens')->firstOrFail();
+
+        $response = $this->get('/collection');
+
+        $response->assertStatus(200);
+        $response->assertSeeText('Star Wars: Episode VII - The Force Awakens');
+
+        Livewire::test(Collectibles::class, [
+            'user' => $user
+        ])
+            ->call('removeCollectible', $movie->id);
+
+        $response = $this->get('/collection');
+
+        $response->assertStatus(200);
+        $response->assertDontSeeText('Star Wars: Episode VII - The Force Awakens');
+    }
+
     private static function createUser(): User
     {
         return User::factory()->create();

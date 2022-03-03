@@ -27,12 +27,12 @@ class Collectibles extends Component
     public function removeCollectible(Movie $movie)
     {
         /* Get the correct collectible instance */
-        $collectible = User::current()->collectibles()->where('movie_id', $movie->id)->firstOrFail();
+        $collectible = $this->user->collectibles()->where('movie_id', $movie->id)->firstOrFail();
 
         /* Make sure we can remove it */
         $this->authorize('delete', $collectible);
 
         /* Remove the movie from the users collection effectively removing the collectible */
-        User::current()->collection()->detach($movie);
+        $this->user->collection()->detach($movie);
     }
 }
